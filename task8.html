@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS task-2</title>
+</head>
+
+<body>
+    <label for="ist">Enter a string:</label>
+    <input type="text" id="ist">
+    <button onclick="sdisplay()">Sort</button>
+
+    <p>Result: <span id="sorted"></span></p>
+
+    <script>
+        function sortalp(ist) {
+            return ist.split('').sort().join('');
+        }
+
+        function sdisplay() {
+            const ie = document.getElementById("ist");
+            const se = document.getElementById("sorted");
+            const ist = ie.value;
+            const sorted = sortalp(ist);
+            se.textContent = sorted;
+        }
+    </script>
+</body>
+
+</html>

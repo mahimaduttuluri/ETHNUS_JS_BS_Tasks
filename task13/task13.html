@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<title>JS task-7</title>
+<style>
+    .body {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <center>
+        <div id="container">
+            <img id="staticImage" src="train.png" width="400" height="400">
+        </div>
+        <p>
+            <button onclick="startGif()">Start</button>
+            <button onclick="pauseGif()">Stop</button>
+        </p>
+    </center>
+    <script>
+        let gifElement = document.createElement("img");
+        gifElement.id = "gif";
+        gifElement.src = "train.gif";
+        gifElement.width = 400;
+        gifElement.height = 400;
+        gifElement.style.display = "none";
+        let staticImageElement = document.getElementById("staticImage");
+        let gifPlaying = false;
+
+        function startGif() {
+            staticImageElement.style.display = "none";
+            gifElement.style.display = "block";
+            gifPlaying = true;
+        }
+
+        function pauseGif() {
+            if (gifPlaying) {
+                gifElement.style.display = "none";
+                staticImageElement.style.display = "block";
+                gifPlaying = false;
+            }
+        }
+        document.getElementById("container").appendChild(gifElement);
+    </script>
+
+</body>
+
+</html>

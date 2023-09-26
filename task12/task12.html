@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS task-6</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fafafa;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+        }
+
+        img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #3897f0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2772b8;
+        }
+
+        #validation-message {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .rememberme {
+            text-align: left;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <img src="./logo.jpg" style="width: 200px;">
+        <form action="https://www.instagram.com/ " onsubmit=" return validate()" id="login-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <div class="rememberme">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember Me</label>
+            </div>
+
+            <p>Don't have an account? <a href="">Sign Up</a></p>
+        </form>
+    </div>
+    <div id="validation-message"></div>
+    <script>
+        function validate() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var validationMessage = document.getElementById('validation-message');
+            var usernamePattern = /^[a-zA-Z][a-zA-Z0-9_]*$/;
+            var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+            var errors = [];
+            if (!username.match(usernamePattern) || username.length < 5) {
+                errors.push('Invalid Username');
+            }
+            if (!password.match(passwordPattern)) {
+                errors.push('Invalid Password');
+            }
+            if (errors.length > 0) {
+                validationMessage.textContent = errors.join(' ');
+                return false;
+            }
+            validationMessage.textContent = '';
+            return true;
+        }        
+    </script>
+</body>
+
+</html>

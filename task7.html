@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JS task-1</title>
+</head>
+
+<body>
+    <label for="inputNumber">Enter number:</label>
+    <input id="inputNumber">
+
+    <button onclick="reverseAndDisplay()">Reverse</button>
+
+    <p>Result: <span id="reversedNumber"></span></p>
+
+    <script>
+        function reverseNumber(number) {
+            const numString = number.toString();
+            const reversedString = numString.split('').reverse().join('');
+            const reversedNumber = parseFloat(reversedString);
+            return reversedNumber;
+        }
+        function reverseAndDisplay() {
+            const inputElement = document.getElementById("inputNumber");
+            const reversedElement = document.getElementById("reversedNumber");
+            const inputNumber = parseFloat(inputElement.value);
+            const reversed = reverseNumber(inputNumber);
+            if (!isNaN(reversed)) {
+                reversedElement.textContent = reversed;
+            } else {
+                reversedElement.textContent = "Invalid input";
+            }
+        }
+    </script>
+</body>
+
+</html>

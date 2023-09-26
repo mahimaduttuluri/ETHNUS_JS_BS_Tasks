@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS task-5</title>
+    <style>
+        .form-group {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        label {
+            width: 100px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            margin-left: 10px;
+        }
+
+        .error-input {
+            border: 1px solid red;
+        }
+
+        button {
+            margin-left: 100px;
+            background-color: lightgrey;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" name="name"></input>
+                <span class="error" id="name-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" name="email"></input>
+                <span class="error" id="email-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="website">Website</label>
+                <input id="website" name="website"></input>
+                <span class="error" id="website-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" cols="30"></textarea>
+                <span class="error" id="message-error"></span>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const website = document.getElementById('website');
+            const message = document.getElementById('message');
+
+            name.classList.remove('error-input');
+            email.classList.remove('error-input');
+            website.classList.remove('error-input');
+            message.classList.remove('error-input');
+
+            document.getElementById('name-error').textContent = '';
+            document.getElementById('email-error').textContent = '';
+            document.getElementById('website-error').textContent = '';
+            document.getElementById('message-error').textContent = '';
+
+            if (!name.value.trim()) {
+                name.classList.add('error-input');
+                document.getElementById('name-error').textContent = 'This field is required';
+            }
+            if (!email.value.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+                email.classList.add('error-input');
+                document.getElementById('email-error').textContent = 'A valid email address is required';
+            }
+            if (!website.value.trim() || !website.value.match(/^https?:\/\/.+/i)) {
+                website.classList.add('error-input');
+                document.getElementById('website-error').textContent = 'A valid url is required';
+            }
+            if (!message.value.trim()) {
+                message.classList.add('error-input');
+                document.getElementById('message-error').textContent = 'This field is required';
+            }
+
+            if (name.classList.contains('error-input') || email.classList.contains('error-input') || website.classList.contains('error-input') || message.classList.contains('error-input')) {
+                return;
+            }
+
+        });
+    </script>
+</body>
+
+</html>

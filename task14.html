@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS task-8</title>
+    <style>
+        .error {
+            color: red;
+            margin-left: 10px;
+            display: inline-block;
+        }
+
+        body {
+            background-image: linear-gradient(yellow, orange, pink);
+            margin-bottom: 450px;
+        }
+
+        .i2 {
+            background-color: red;
+            width: 100px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            ;
+        }
+
+        .i1 {
+            width: 500px;
+
+        }
+
+        .i3 {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="i1">
+            <form id="registration-form">
+                <h1>Registration form</h1>
+                <div class="i3">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName">
+                    <span class="error" id="firstName-error"></span>
+                    <br>
+                </div>
+                <div class="i3"><label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName">
+                    <span class="error" id="lastName-error"></span>
+                    <br>
+                </div>
+                <div class="i3">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email">
+                    <span class="error" id="email-error"></span>
+                    <br>
+                </div>
+                <div class="i3"><label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                    <span class="error" id="password-error"></span>
+                    <br>
+                </div>
+                <div class="i3"><label for="confirmPassword">Re-enter Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword">
+                    <span class="error" id="confirmPassword-error"></span>
+                    <br>
+                </div>
+                <div class="i3"><label>Gender</label>
+                    <input type="radio" id="male" name="gender" value="Male">Male
+                    <input type="radio" id="female" name="gender" value="Female">Female
+                    <br>
+                </div>
+                <div class="i3"><label for="age">Age</label>
+                    <input type="text" id="age" name="age">
+                    <span class="error" id="age-error"></span>
+                    <br>
+                </div>
+
+                <div class="i3"><label for="phoneNumber">Phone Number</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber">
+                    <span class="error" id="phoneNumber-error"></span>
+                    <br>
+                </div>
+
+
+                <div class="i3"><label for="address">Address</label>
+                    <textarea id="address" name="address" rows="4"></textarea>
+                    <span class="error" id="address-error"></span>
+                    <br>
+                </div>
+
+                <div class="i3"><label for="state">State</label>
+                    <input type="text" id="state" name="state">
+                    <span class="error" id="state-error"></span>
+                    <br>
+                </div>
+
+                <div class="i3">
+                    <label for="country">Country</label>
+                    <select id="country" name="country">
+                        <option value="Choose your country">Choose your country</option>
+                        <option value="India">India</option>
+                    </select>
+                    <br>
+                </div>
+                <div class="i3"><label>Languages known</label>
+                    <input type="checkbox" id="english" name="languages" value="English">English
+                    <input type="checkbox" id="kannada" name="languages" value="Kannada">Kannada
+                    <input type="checkbox" id="hindi" name="languages" value="Hindi">Hindi
+                    <input type="checkbox" id="telugu" name="languages" value="Telugu">Telugu
+                    <br>
+                </div>
+
+
+                <label for="declaration" align="left">Hereby I declare all the given details are true</label>
+                <input align="left" type="checkbox" id="declaration" name="declaration" checked>
+                <br>
+
+                <p align="right">Login to <a href="https://ethnus.com/">Ethnus</a> website</p>
+
+                <br>
+                <input class="i2" type="submit" value="Register">
+            </form>
+        </div>
+    </center>
+    <div id="validation-message"></div>
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const age = document.getElementById('age').value;
+            const address = document.getElementById('address').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const state = document.getElementById('state').value;
+            const namePattern = /^[a-zA-Z]+$/;
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+            const phoneNumberPattern = /^\d{10}$/;
+
+            const errors = {
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+                age: '',
+                address: '',
+                phoneNumber: '',
+                state: ''
+            };
+
+            if (!firstName.match(namePattern)) {
+                errors.firstName = 'POOR';
+            }
+            if (!lastName.match(namePattern)) {
+                errors.lastName = 'POOR';
+            }
+            if (!email.match(emailPattern)) {
+                errors.email = 'POOR';
+            }
+            if (!password.match(passwordPattern)) {
+                errors.password = 'POOR';
+            }
+            if (password !== confirmPassword || !confirmPassword.match(passwordPattern)) {
+                errors.confirmPassword = 'POOR OR MISMATCH';
+            }
+            if (isNaN(age) || age < 18) {
+                errors.age = 'POOR';
+            }
+            if (address.trim() === '') {
+                errors.address = 'POOR';
+            }
+            if (!phoneNumber.match(phoneNumberPattern)) {
+                errors.phoneNumber = 'POOR';
+            }
+            if (state.trim() === '') {
+                errors.state = 'POOR';
+            }
+            displayErrorMessage('firstName', errors.firstName);
+            displayErrorMessage('lastName', errors.lastName);
+            displayErrorMessage('email', errors.email);
+            displayErrorMessage('password', errors.password);
+            displayErrorMessage('confirmPassword', errors.confirmPassword);
+            displayErrorMessage('age', errors.age);
+            displayErrorMessage('address', errors.address);
+            displayErrorMessage('phoneNumber', errors.phoneNumber);
+            displayErrorMessage('state', errors.state);
+
+            const hasErrors = Object.values(errors).some(error => error === 'POOR' || error === 'POOR OR MISMATCH');
+            if (!hasErrors) {
+                this.submit();
+            }
+        });
+
+        function displayErrorMessage(fieldId, message) {
+            const errorElement = document.getElementById(`${fieldId}-error`);
+            errorElement.textContent = message;
+        }
+
+    </script>
+</body>
+
+</html>
